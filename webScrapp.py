@@ -23,8 +23,14 @@ def busca_links(site):
 
 def baixa_pagina(link):
       linksoup = urlopen('http://127.0.0.1:8000' + link)
-      html_list.append(BeautifulSoup(linksoup.read(), 'html.parser'))
-      return BeautifulSoup(linksoup.read(), 'html.parser')
+      html = BeautifulSoup(linksoup.read(), 'html.parser')
+      sigla = ''
+      for tag in html.find_all('td', class_="w2p_fw"):
+            if tag.previous_element == "Iso: ":
+                  sigla = tag.string
+      dic = {"sigla": sigla, "html":html}
+      html_list.append(dic)
+      # html_list.append(BeautifulSoup(linksoup.read(), 'html.parser'))
 
 def salva_dados():
       with open ('paises.csv', 'w', newline='') as csvfile:
@@ -39,7 +45,7 @@ def salva_dados():
                   vizinhos = ''
                   timestamp = 0
 
-                  for tag in html.find_all('td', class_="w2p_fw"):
+                  for tag in html.get("html").find_all('td', class_="w2p_fw"):
                         if tag.previous_element == "Country: ":
                               nome = tag.string
                         
@@ -52,14 +58,17 @@ def salva_dados():
                         if tag.previous_element == "Neighbours: ":
                               for link in tag.find_all('a'):
                                     if link['href'] != '/places/default/iso//':
-                                          linksoup = urlopen('http://127.0.0.1:8000' + link['href'])
-                                          vizinho = BeautifulSoup(linksoup.read(), 'html.parser')
-                                          for tagVizinho in vizinho.find_all('td', class_="w2p_fw"):
-                                                if tagVizinho.previous_element == "Country: ":
-                                                      if vizinhos != '':
-                                                            vizinhos += ', '
-                                                      vizinhos += tagVizinho.string                            
-
+                                          sigla = link['href'].replace('/places/default/iso/', '')
+                                          # print(sigla)
+                                          for pais in html_list:
+                                                # print(pais.get("sigla"))
+                                                if pais.get("sigla") == sigla:
+                                                      for tagVizinho in pais.get("html").find_all('td', class_="w2p_fw"):
+                                                            if tagVizinho.previous_element == "Country: ":
+                                                                  if vizinhos != '':
+                                                                        vizinhos += ', '
+                                                                  vizinhos += tagVizinho.string
+                                                                  
                         timestamp = time.time()
 
                   escritor.writerow([nome, capital, area, vizinhos, timestamp])
