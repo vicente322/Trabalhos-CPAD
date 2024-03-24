@@ -72,12 +72,12 @@ def salva_dados():
                   escritor.writerow([nome, capital, area, vizinhos, timestamp])
 
 def confere_lista():
-      i = 0
       dados = []
       erros = False
 
       with open ('paises.csv', newline='') as csvfile:
             leitor = csv.reader(csvfile, delimiter=';', quotechar='|')
+            i = 0
             for row in leitor:
                   if i == 0:
                         dados.append(row)
@@ -89,7 +89,7 @@ def confere_lista():
 
                         paisHTML = ''
                         capitalHTML = ''
-                        areaHTML = ''
+                        areaHTML = 0
                         paisesVizHTML = ''
 
                         html = html_list[i-1]
@@ -119,28 +119,14 @@ def confere_lista():
                               timestamp = time.time()
                               dados.append([paisHTML, capitalHTML, areaHTML, paisesVizHTML, timestamp])
                               erros = True
+                              if paisesVizCSV != paisesVizHTML:
+                                    print('html')
+                                    print(paisesVizHTML)
+                                    print('csv')
+                                    print(paisesVizCSV)
                         else:
                               dados.append(row)
 
-                        if paisCSV != paisHTML:
-                              print(paisCSV)
-                              print('nomes diferentes\n')
-                        if capitalCSV != capitalHTML:
-                              print(paisCSV)
-                              print('capital diferente')
-                              print('html')
-                              print(capitalHTML.__class__)
-                              print('csv')
-                              print(capitalCSV.__class__)
-                        if areaCSV != areaHTML:
-                              print(paisCSV)
-                              print('area diferente')
-                              print('area html: |' + str(areaHTML) + '|')
-                              print('area csv: |' + str(areaCSV) + '|\n')
-                        if paisesVizCSV != paisesVizHTML:
-                              print(paisCSV)
-                              print('vizinhos diferentes\n')
-                        
                   i += 1
       
 
@@ -155,11 +141,11 @@ def confere_lista():
 
 def monitora():
       while 1 == 1:
-            time.sleep(15)
-            html_list=[]
+            html_list.clear()
             baixa_pagina()
             confere_lista()
             print('loop')
+            time.sleep(300)
             
 
 
