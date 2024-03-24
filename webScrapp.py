@@ -21,16 +21,16 @@ def busca_links(site):
                         html = urlopen('http://127.0.0.1:8000' + tag.attrs['href'])
                         busca_links(html)
 
-def baixa_pagina(link):
-      linksoup = urlopen('http://127.0.0.1:8000' + link)
-      html = BeautifulSoup(linksoup.read(), 'html.parser')
-      sigla = ''
-      for tag in html.find_all('td', class_="w2p_fw"):
-            if tag.previous_element == "Iso: ":
-                  sigla = tag.string
-      dic = {"sigla": sigla, "html":html}
-      html_list.append(dic)
-      # html_list.append(BeautifulSoup(linksoup.read(), 'html.parser'))
+def baixa_pagina():
+      for link in link_list:
+            linksoup = urlopen('http://127.0.0.1:8000' + link)
+            html = BeautifulSoup(linksoup.read(), 'html.parser')
+            sigla = ''
+            for tag in html.find_all('td', class_="w2p_fw"):
+                  if tag.previous_element == "Iso: ":
+                        sigla = tag.string
+            dic = {"sigla": sigla, "html":html}
+            html_list.append(dic)
 
 def salva_dados():
       with open ('paises.csv', 'w', newline='') as csvfile:
@@ -53,15 +53,13 @@ def salva_dados():
                               capital = tag.string
                         
                         if tag.previous_element == "Area: ":
-                              area = int(tag.string.replace(' square kilometres', ''))
+                              area = tag.string.replace(' square kilometres', '')
 
                         if tag.previous_element == "Neighbours: ":
                               for link in tag.find_all('a'):
                                     if link['href'] != '/places/default/iso//':
                                           sigla = link['href'].replace('/places/default/iso/', '')
-                                          # print(sigla)
                                           for pais in html_list:
-                                                # print(pais.get("sigla"))
                                                 if pais.get("sigla") == sigla:
                                                       for tagVizinho in pais.get("html").find_all('td', class_="w2p_fw"):
                                                             if tagVizinho.previous_element == "Country: ":
@@ -73,11 +71,91 @@ def salva_dados():
 
                   escritor.writerow([nome, capital, area, vizinhos, timestamp])
 
+def confere_lista():
+      dados = []
+      erros = False
+
+      with open ('paises.csv', newline='') as csvfile:
+            leitor = csv.reader(csvfile, delimiter=';', quotechar='|')
+            i = 0
+            for row in leitor:
+                  if i == 0:
+                        dados.append(row)
+                  else:
+                        paisCSV = row[0]
+                        capitalCSV = row[1]
+                        areaCSV = row[2]
+                        paisesVizCSV = row[3]
+
+                        paisHTML = ''
+                        capitalHTML = ''
+                        areaHTML = 0
+                        paisesVizHTML = ''
+
+                        html = html_list[i-1]
+
+                        for tag in html.get("html").find_all('td', class_="w2p_fw"):
+                              if tag.previous_element == "Country: ":
+                                    paisHTML = tag.string
+                              if tag.previous_element == "Capital: ":
+                                    capitalHTML = tag.string
+                                    if capitalHTML is None:
+                                          capitalHTML = ''
+                              if tag.previous_element == "Area: ":
+                                    areaHTML = tag.string.replace(' square kilometres', '')
+                              if tag.previous_element == "Neighbours: ":
+                                    for link in tag.find_all('a'):
+                                          if link['href'] != '/places/default/iso//':
+                                                sigla = link['href'].replace('/places/default/iso/', '')
+                                                for pais in html_list:
+                                                      if pais.get("sigla") == sigla:
+                                                            for tagVizinho in pais.get("html").find_all('td', class_="w2p_fw"):
+                                                                  if tagVizinho.previous_element == "Country: ":
+                                                                        if paisesVizHTML != '':
+                                                                              paisesVizHTML += ', '
+                                                                        paisesVizHTML += tagVizinho.string
+
+                        if paisCSV != paisHTML or capitalCSV != capitalHTML or areaCSV != areaHTML or paisesVizCSV != paisesVizHTML:
+                              timestamp = time.time()
+                              dados.append([paisHTML, capitalHTML, areaHTML, paisesVizHTML, timestamp])
+                              erros = True
+                              if paisesVizCSV != paisesVizHTML:
+                                    print('html')
+                                    print(paisesVizHTML)
+                                    print('csv')
+                                    print(paisesVizCSV)
+                        else:
+                              dados.append(row)
+
+                  i += 1
+      
+
+      
+
+      if erros:
+            print('erro')
+            with open ('paises.csv', 'w', newline='') as csvfile:
+                  escritor = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                  for linha in dados:
+                        escritor.writerow(linha)
+
+def monitora():
+      while 1 == 1:
+            html_list.clear()
+            baixa_pagina()
+            confere_lista()
+            print('loop')
+            time.sleep(300)
+            
+
+
             
 html = urlopen('http://127.0.0.1:8000/places/default/index')
 
 busca_links(html)
-for link in link_list:
-      baixa_pagina(link)
+
+baixa_pagina()
 
 salva_dados()
+
+monitora()
