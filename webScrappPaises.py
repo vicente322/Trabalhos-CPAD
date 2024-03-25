@@ -128,9 +128,6 @@ def confere_lista():
                               dados.append(row)
 
                   i += 1
-      
-
-      
 
       if erros:
             print('erro')
@@ -141,14 +138,11 @@ def confere_lista():
 
 def monitora():
       while 1 == 1:
+            time.sleep(300)
             html_list.clear()
             baixa_pagina()
             confere_lista()
             print('loop')
-            time.sleep(300)
-            
-
-
             
 html = urlopen('http://127.0.0.1:8000/places/default/index')
 
