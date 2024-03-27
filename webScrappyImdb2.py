@@ -15,6 +15,10 @@ def pega_autores(item):
         response_serie.raise_for_status()
     except requests.HTTPError as e:
         print("The server returned an HTTP error:", e)
+        if "Gateway Time-out for url:" in e.response:
+            pega_autores(item)
+            print('recursivo')
+            return item
         return None
     except requests.RequestException as e:
         print("Request error:", e)
@@ -62,7 +66,7 @@ def dados_series():
         for serie in series:
             item = {}
             item["titulo"] = serie.find(class_= "ipc-title__text").text.split(" ", 1)[1]
-            div = soup.find('div', class_="sc-b0691f29-7 hrgukm cli-title-metadata")
+            div = serie.find('div', class_="sc-b0691f29-7 hrgukm cli-title-metadata")
             spans = div.find_all('span', class_="sc-b0691f29-8 ilsLEX cli-title-metadata-item")
             item["ano"] = int(spans[0].text[0:4])
             item["episodios"] = int(spans[1].text.split()[0])
@@ -79,11 +83,6 @@ def dados_series():
             
         
 dados_series()
-
-        
-
-
-
 
     
     
