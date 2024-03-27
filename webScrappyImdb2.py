@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 import requests
+import time
 from bs4 import BeautifulSoup
 
 def pega_autores(item):
@@ -26,8 +27,9 @@ def pega_autores(item):
         item["generos"] = [genero.get_text(strip = True) for genero in generos]
         atores = soup.find_all('a', class_="sc-bfec09a1-1 gCQkeh")
         item["atores"] = [ator.get_text(strip=True) for ator in atores]
-        popularidade = soup.find('div', class_='sc-5f7fb5b4-1 fTREEx').text
-        if popularidade:
+        poptext = soup.find('div', class_='sc-5f7fb5b4-1 fTREEx')
+        if poptext is not None:
+            popularidade = poptext.text
             item["popularidade"] = popularidade
         return item
         
@@ -54,8 +56,9 @@ def dados_series():
         soup = BeautifulSoup(html, 'html.parser')
         lista_series = soup.find('ul', class_="ipc-metadata-list ipc-metadata-list--dividers-between sc-a1e81754-0 eBRbsI compact-list-view ipc-metadata-list--base")
         if lista_series:
-            series = lista_series.find_all('li')[:10]
+            series = lista_series.find_all('li')#[:10]
         top_series = []
+        i = 0
         for serie in series:
             item = {}
             item["titulo"] = serie.find(class_= "ipc-title__text").text.split(" ", 1)[1]
@@ -67,6 +70,10 @@ def dados_series():
             item["link"]= serie.find("a", class_= "ipc-title-link-wrapper")["href"]
             pega_autores(item)
             top_series.append(item)
+            i += 1
+            print(i)
+            if i == 50 or i == 100 or i == 150 or i == 200:
+                time.sleep(5)
         with open("series.json", "w") as writeJSON:
             json.dump(top_series, writeJSON, ensure_ascii=False, indent=2)
             
