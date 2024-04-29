@@ -1,0 +1,9 @@
+Nesta tarefa, você deve implementar as etapas indicadas que são necessárias para executar o notebook 
+sobre preparação de dados. Utilize o dataset Iris existente dentro da pasta datasets, disponibilizado 
+junto com notebook. Não utilize outra versão do dataset, pois o notebook não funcionará.
+
+O trabalho deve ser realizado em grupos de 2 até 3 pessoas e apenas uma etapa por grupo é necessária.
+
+A entrega a ser realizada é a submissão apenas do arquivo ipynb preenchido com os exercícios.
+
+Entrega atrasada NÃO É PERMITIDA.
