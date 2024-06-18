@@ -1,0 +1,69 @@
+;id;nome
+0;D5;Áreas Urbanizadas
+1;CL;Cadastro Central de Empresas
+2;CA;Censo Agropecuário
+3;ME;Censo Comum do Mercosul, Bolívia e Chile
+4;CD;Censo Demográfico
+5;CM;Contagem da População 
+6;DU;Contas de ecossistemas: o uso da terra nos biomas brasileiros
+7;DT;Contas de Espécies Ameaçadas 
+8;C4;Contas Econômicas Ambientais da Água
+9;DR;Contas Econômicas Ambientais da Terra: Contabilidade Física
+10;DZ;Contas Econômicas Ambientais de Energia: produtos da biomassa
+11;SU;Contas Nacionais Anuais
+12;ST;Contas Nacionais Trimestrais
+13;DE;Demografia das Empresas e Estatísticas de Empreendedorismo
+14;D9;Estatísticas dos Cadastros de Microempreendedores Individuais
+15;XF;Estimativas de População
+16;FP;Fundações Privadas e Associações Sem Fins Lucrativos
+17;IU;Indicadores de Desenvolvimento Sustentável
+18;IL;Índice de Preços ao Consumidor em Real
+19;IR;Índice de Preços ao Produtor
+20;IJ;Índice de Reajuste do Salário Mínimo
+21;PC;Índice Nacional de Preços ao Consumidor
+22;IA;Índice Nacional de Preços ao Consumidor Amplo
+23;IQ;Índice Nacional de Preços ao Consumidor Amplo 15
+24;IG;Índice Nacional de Preços ao Consumidor Amplo Especial
+25;PG;Índice Nacional de Preços ao Consumidor Especial
+26;LA;Levantamento Sistemático da Produção Agrícola
+27;C2;Objetivos de Desenvolvimento Sustentável
+28;AC;Pesquisa Anual da Indústria da Construção
+29;PB;Pesquisa Anual de Comércio
+30;PY;Pesquisa Anual de Serviços
+31;PP;Pesquisa da Pecuária Municipal
+32;AM;Pesquisa de Assistência Médico-Sanitária
+33;ES;Pesquisa de Estoques
+34;PM;Pesquisa de Informações Básicas Municipais
+35;IT;Pesquisa de Inovação
+36;OF;Pesquisa de Orçamentos Familiares
+37;SH;Pesquisa de Serviços de Hospedagem
+38;SE;Pesquisa de Serviços de Publicidade e Promoção
+39;PT;Pesquisa de Serviços de Tecnologia da Informação
+40;RC;Pesquisa Estatísticas do Registro Civil
+41;PI;Pesquisa Industrial Anual
+42;PK;Pesquisa Industrial Anual - Empresa
+43;PJ;Pesquisa Industrial Anual - Produto
+44;DG;Pesquisa Industrial Mensal - Dados Gerais
+45;PZ;Pesquisa Industrial Mensal - Produção Física
+46;XY;Pesquisa Industrial Mensal de Emprego e Salário
+47;AB;Pesquisa Mensal de Abate de Animais
+48;MC;Pesquisa Mensal de Comércio
+49;PE;Pesquisa Mensal de Emprego
+50;SC;Pesquisa Mensal de Serviços
+51;PL;Pesquisa Mensal do Leite
+52;SB;Pesquisa Nacional de Saneamento Básico
+53;XN;Pesquisa Nacional de Saúde
+54;AA;Pesquisa Nacional de Saúde do Escolar
+55;PD;Pesquisa Nacional por Amostra de Domicílios
+56;B5;Pesquisa Nacional por Amostra de Domicílios Contínua anual
+57;BB;Pesquisa Nacional por Amostra de Domicílios Contínua mensal
+58;DD;Pesquisa Nacional por Amostra de Domicílios Contínua trimestral
+59;AX;Pesquisa Trimestral do Abate de Animais
+60;CQ;Pesquisa Trimestral do Couro
+61;LT;Pesquisa Trimestral do Leite
+62;PA;Produção Agrícola Municipal
+63;VS;Produção da Extração Vegetal e da Silvicultura
+64;PO;Produção de Ovos de Galinha
+65;IO;Produto Interno Bruto dos Municípios
+66;XE;Projeção da População
+67;SI;Sistema Nacional de Pesquisa de Custos e Índices da Construção Civil
