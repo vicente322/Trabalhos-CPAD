@@ -83,7 +83,6 @@ def transform_data():
       files_names = os.listdir(parquet_path)
 
       for file in files_names:
-            
             try:
                   if file.replace('.parquet', '.csv') not in os.listdir(csv_path):
                         df = pd.read_parquet(path= parquet_path + file)
@@ -126,9 +125,6 @@ def transform_data():
                   error_logs.append(e)
                   error_files.append(file)
                   print(f"Erro ao processar o arquivo: {file}")
-                  print
-
-
 
       # Escrever os arquivos que causaram erro em um arquivo de texto
       if len(error_files) > 0:
@@ -146,7 +142,6 @@ def get_time():
       run_time = end_time - init_time
       print(f"Tempo total de execução: {run_time:.2f} segundos")
       print(f"Arquivos baixados: {files_downloaded}")
-
 
 def init():
 
