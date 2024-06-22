@@ -1,17 +1,17 @@
 import os
 import time
 import pandas as pd
-from pysus.online_data import SINAN as SINAN_Online
-from pysus.online_data import SINASC as SINASC_Online
+# from pysus.online_data import SINAN as SINAN_Online
+# from pysus.online_data import SINASC as SINASC_Online
 from pysus.online_data import SIM as SIM_ONLINE
 from pysus.ftp.databases.sinan import SINAN
-from pysus.ftp.databases.sinasc import SINASC
-from pysus.ftp.databases.sim import SIM
+# from pysus.ftp.databases.sinasc import SINASC
+# from pysus.ftp.databases.sim import SIM
 
 init_time = time.time()
-states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', \
-          'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', \
-          'RR', 'SC', 'SP', 'SE', 'TO']
+# states = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', \
+#           'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', \
+#           'RR', 'SC', 'SP', 'SE', 'TO']
 years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 global sinan, sinasc, sim, sinan_files, sinasc_files, sim_files, data_path, parquet_path, csv_path, files_downloaded
 
@@ -29,22 +29,25 @@ def check_dir():
       global parquet_path, csv_path, data_path
 
       this_path = os.path.dirname(os.path.abspath(__file__))
-      data_bin_name = 'Data'
-      data_path = this_path + '/' + data_bin_name + '/'
-      parquet_path = data_path + 'Parquet/'
-      csv_path = data_path + 'CSV/'
+      data_path = this_path + '/Data/'
+      sinan_path = data_path + 'SINAN/'
+      parquet_path = sinan_path + 'Parquet/'
+      csv_path = sinan_path + 'CSV/'
 
-      if not data_bin_name in os.listdir(this_path):
+      if not 'Data' in os.listdir(this_path):
             os.mkdir(data_path)
 
-      if 'error_log.txt' in os.listdir(data_path):
-            os.remove(data_path + 'error_log.txt')
-            os.remove(data_path + 'error_files.txt')
+      if not 'SINAN' in os.listdir(data_path):
+            os.mkdir(sinan_path)
 
-      if not 'Parquet' in os.listdir(data_path) :
+      if 'error_log.txt' in os.listdir(sinan_path):
+            os.remove(sinan_path + 'error_log.txt')
+            os.remove(sinan_path + 'error_files.txt')
+
+      if not 'Parquet' in os.listdir(sinan_path) :
             os.mkdir(parquet_path)
 
-      if not 'CSV' in os.listdir(data_path) :
+      if not 'CSV' in os.listdir(sinan_path) :
             os.mkdir(csv_path)
 
 def execute_downloads():
