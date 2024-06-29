@@ -76,10 +76,10 @@ def aggregate_data_by_day(df):
     return daily_means
 
 def save_aggregated_data(state, year, aggregated_df):
-    output_dir = f'./Data/INMET/dados_agregados/{year}'
+    output_dir =  os.path.dirname(os.path.abspath(__file__)) + f'/Data/INMET/dados_agregados/{year}'
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f'{state}_{year}_aggregated.csv')
-    aggregated_df.to_csv(output_file, index_label='Data', encoding='utf-8')
+    aggregated_df.to_csv(output_file, index_label='Data', encoding='utf-8', sep = ';')
 
 def process_yearly_data(year_dir, year):
     for file_name in os.listdir(year_dir):
@@ -92,7 +92,8 @@ def process_yearly_data(year_dir, year):
             save_aggregated_data(state, year, aggregated_df)
 
 def main():
-    base_dir = './Data/INMET/dados_originais'
+    this_path = os.path.dirname(os.path.abspath(__file__))
+    base_dir = this_path + '/Data/INMET/dados_originais/'
     for year in range(2013, 2023):
         year_dir = os.path.join(base_dir, str(year))
         process_yearly_data(year_dir, year)
