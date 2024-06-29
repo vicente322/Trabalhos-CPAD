@@ -66,7 +66,12 @@ def read_and_process_csv(file_path):
     # Clean numeric columns of commas
     numeric_columns = ['Temp Ar', 'Umidade Rel']
     
-    df[numeric_columns] = df[numeric_columns].replace(',', '', regex=True).astype(float)
+    df[numeric_columns] = df[numeric_columns].replace(',', '.', regex=True).astype(float)
+    # Filter out rows with invalid Temp Ar or Umidade Rel values
+    df = df[
+        (df['Temp Ar'].between(-10, 50)) &
+        (df['Umidade Rel'].between(0, 100))
+    ]
     
     return df
 
