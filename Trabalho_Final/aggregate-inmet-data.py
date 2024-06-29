@@ -18,14 +18,8 @@ def read_and_process_csv(file_path):
     # Read the CSV file, handle special characters by specifying the encoding
     df = pd.read_csv(file_path, encoding='latin1', sep=';', skiprows=8)
     
-    # Print the columns to debug after reading
-    print(f"Columns in {file_path} after reading: {df.columns}")
-    
     # Normalize column names
     df.columns = [normalize_column_name(col) for col in df.columns]
-    
-    # Print the columns to debug after normalization
-    print(f"Columns in {file_path} after normalization: {df.columns}")
     
     # Define the column mappings you are interested in
     column_mappings = {
@@ -105,3 +99,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print('All INMET data aggregated and saved in ./Data/INMET/dados_agregados')
