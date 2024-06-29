@@ -87,6 +87,8 @@ def save_aggregated_data(state, year, aggregated_df):
     aggregated_df.to_csv(output_file, index_label='Data', encoding='utf-8', sep = ';')
 
 def process_yearly_data(year_dir, year):
+    state_dfs = {}
+    
     for file_name in os.listdir(year_dir):
         if file_name.endswith('.csv') or file_name.endswith('.CSV'):
             state = file_name.split('_')[2]
@@ -94,7 +96,16 @@ def process_yearly_data(year_dir, year):
             
             df = read_and_process_csv(file_path)
             aggregated_df = aggregate_data_by_day(df)
-            save_aggregated_data(state, year, aggregated_df)
+            
+            if state in state_dfs:
+                state_dfs[state] = pd.concat([state_dfs[state], aggregated_df])
+            else:
+                state_dfs[state] = aggregated_df
+    
+    # Save all aggregated data for each state
+    for state, aggregated_df in state_dfs.items():
+        aggregated_df = aggregated_df.groupby(aggregated_df.index).mean()
+        save_aggregated_data(state, year, aggregated_df)
 
 def main():
     this_path = os.path.dirname(os.path.abspath(__file__))
