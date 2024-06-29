@@ -2,8 +2,10 @@ import pandas as pd
 import os
 
 # Lista de estados que queremos, índices de acordo com tabela do IBGE: https://www.ibge.gov.br/explica/codigos-dos-municipios.php
-# 43 = Rio Grande do Sul
-# 53 = Distrito Federal
+# GO=52
+# SP=35
+# ES=32
+# RS=43
 sg_uf_list = [32, 35, 43, 52]
 
 def filter_data_by_ufs(file_name):
