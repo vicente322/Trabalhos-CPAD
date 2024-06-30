@@ -7,11 +7,15 @@ Autores: [Aléxia Dorneles](https://github.com/alexiadorneles), [Arthur Land Avi
 
 ## Coleta de Dados
 
-Dengue - SINAN
+### Dengue - SINAN
 
-Populacão - IBGE
+Pysus
 
-Dados Climáticos - INMET
+### Populacão - IBGE
+
+Para o IBGE, os dados foram encontrados na internet em tabelas separadas e disformes
+
+### Dados Climáticos - INMET
 
 
 ## Preparacão do Dados
