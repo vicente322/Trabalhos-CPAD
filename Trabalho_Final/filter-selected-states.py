@@ -11,7 +11,7 @@ sg_uf_list = [32, 35, 43, 52]
 def filter_data_by_ufs(file_name):
     this_path = os.path.dirname(os.path.abspath(__file__))
     input_dir = this_path + '/Data/SINAN/CSV/'
-    output_dir = this_path + '/Data/Filtered_CSV/'
+    output_dir = this_path + '/Data/SINAN/CSV/'
     os.makedirs(output_dir, exist_ok=True)
     df = pd.read_csv(input_dir + file_name, sep=';', low_memory=False)
     
