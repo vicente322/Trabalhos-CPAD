@@ -13,7 +13,7 @@ Pysus
 
 ### Populacão - IBGE
 
-Para o IBGE, os dados foram encontrados na internet em tabelas separadas e disformes
+Para o IBGE, os dados foram encontrados na internet em tabelas separadas e disformes e unificados posteriormente, na preparacao
 
 ### Dados Climáticos - INMET
 

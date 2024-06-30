@@ -5,10 +5,10 @@ from pysus.ftp.databases.sinan import SINAN
 
 init_time = time.time()
 years = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
-global sinan, sinasc, sim, sinan_files, sinasc_files, sim_files, data_path, parquet_path, csv_path, files_downloaded
+global sinan, sinan_files, data_path, parquet_path, csv_path, files_downloaded
 
 def load_databases():
-      global sinan, sinasc, sim, sinan_files, sinasc_files, sim_files
+      global sinan, sinan_files
 
       sinan = SINAN().load()
       sinan_files = sinan.get_files(dis_code=['DENG'], year=years)
