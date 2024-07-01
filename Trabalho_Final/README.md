@@ -17,6 +17,9 @@ Para o IBGE, os dados foram encontrados na internet em tabelas separadas e disfo
 
 ### Dados Climáticos - INMET
 
+Para o INMET, os dados foram encontrados na internet em tabelas separadas e disformes e unificados posteriormente, na preparacao.
+Dados disponíveis em: https://portal.inmet.gov.br/dadoshistoricos
+
 
 ## Preparacão do Dados
 
@@ -33,3 +36,5 @@ Os dados foram adaptados para o seu tipo correto. A representacao das UFs foi al
 Para pegar a Umidade e Temperatura média de cada estado, pegamos as estacões de cada estado e fizemos a média de todas medicoes, por dia.
 
 Os valores foram separados por estado e por ano, mas foram unificados em uma unica tabela no Power BI. Por estar com "." em vez de "," para o separador de casas decimais, foi necessário transformar os dados de temperatura e umidade.
+
+Além disso, havia uma diferença na nomenclatura de colunas informando a data, que teve ser tratada e considerada no script de agregação de dados. Para os valores de temperatura, dados inválidos como -99999 atrapalharam o cálculo da média, por isso foi necessário a limpeza de dados, removendo tudo que não estava entre o range -10 e 50 (valores extremos porém possíveis para a informação de temperatura).
